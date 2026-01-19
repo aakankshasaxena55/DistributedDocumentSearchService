@@ -2,25 +2,25 @@ DOCUMENT SEARCH SERVICE
 
 Core Capabilities-
 
-1)Security & Access Control
-JWT-based authentication
-Role-based authorization (USER, ADMIN)
-Method-level access enforcement
+1)Security & Access Control-
+JWT-based authentication,
+Role-based authorization (USER, ADMIN),
+Method-level access enforcement,
 Tenant-aware authorization checks
 
-2)Multi-Tenancy
-Tenant ID embedded in JWT claims
-Enforced at controller, service, and query layers
+2)Multi-Tenancy-
+Tenant ID embedded in JWT claims,
+Enforced at controller, service, and query layers,
 Prevents cross-tenant data leakage
 
-3)Search & Indexing
-Full-text search using Elasticsearch
-Tenant-scoped indexing
-Support for metadata and tag-based queries
+3)Search & Indexing-
+Full-text search using Elasticsearch,
+Tenant-scoped indexing,
+Support for metadata and tag-based queries,
 
-4)Performance
-Redis-backed caching layer
-Optimized read paths
+4)Performance-
+Redis-backed caching layer,
+Optimized read paths,
 Reduced database load
 
 Install Docker, JDK 17
@@ -29,8 +29,8 @@ docker-compose up -d
 
 
 Services:
-PostgreSQL
-Elasticsearch
+PostgreSQL,
+Elasticsearch,
 Redis
 
 Running the Application
