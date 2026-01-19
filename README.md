@@ -44,16 +44,19 @@ http://localhost:8080
 Health check-
 GET /actuator/health
 
-Authentication
+Authentication-
 POST /auth/token
 
-Document Management
+Document Management-
+
 POST   /documents
+
 GET    /documents/{id}
+
 DELETE /documents/{id} (ADMIN only)
 
-Search
+Search-
 GET /search?q={query}&tenant={tenantId}
 
-http://localhost:8080
+
 
