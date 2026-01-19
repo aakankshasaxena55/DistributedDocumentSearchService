@@ -1,15 +1,10 @@
 package com.assess.docservice.service;
 
-import com.assess.docservice.model.DocumentEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.assess.docservice.model.SearchDocument;
-import com.assess.docservice.repository.DocumentRepository;
 import com.assess.docservice.repository.SearchRepository;
-import org.springframework.data.elasticsearch.client.elc.NativeQuery;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
-import org.springframework.data.elasticsearch.core.SearchHit;
-import org.springframework.data.elasticsearch.core.query.Query;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.cache.annotation.Cacheable;
 
@@ -18,55 +13,34 @@ import java.util.List;
 @Service
 public class SearchService {
 
+    private static final Logger log =
+            LoggerFactory.getLogger(SearchService.class);
+
     private final ElasticsearchOperations elasticsearchOperations;
 
-    private final SearchRepository repository;
+    private final SearchRepository searchRepository;
 
-    public SearchService(ElasticsearchOperations elasticsearchOperations, SearchRepository repository) {
+    public SearchService(ElasticsearchOperations elasticsearchOperations, SearchRepository searchRepository) {
         this.elasticsearchOperations = elasticsearchOperations;
-        this.repository = repository;
+        this.searchRepository = searchRepository;
     }
 
-    @Cacheable(value = "search", key = "#p0 + ':' + #p1.toLowerCase()")
-    public List<SearchDocument> search(String tenantId, String searchText) {
+    @Cacheable(value = "searchCache", key = "#tenantId + '-' + #query")
+    public List<SearchDocument> search(String tenantId, String query) {
+        log.info("🔍 Searching for '{}' in tenant '{}'", query, tenantId);
 
-        Query query = NativeQuery.builder()
-                .withQuery(q -> q
-                        .bool(b -> b
-                                .must(m -> m
-                                        .match(t -> t
-                                                .field("content")
-                                                .query(searchText)
-                                        )
-                                )
-                                .filter(f -> f
-                                        .term(t -> t
-                                                .field("tenantId")
-                                                .value(tenantId)
-                                        )
-                                )
-                        )
-                )
-                .build();
-
-        return elasticsearchOperations
-                .search(query, SearchDocument.class)
-                .stream()
-                .map(SearchHit::getContent)
-                .toList();
+        return searchRepository.findByTenantIdAndTitleContainingIgnoreCaseOrTenantIdAndContentContainingIgnoreCase(
+                tenantId, query,
+                tenantId, query
+        );
     }
 
-    public List<SearchDocument> search(String q) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String tenantId = (String) auth.getDetails();
+    public List<SearchDocument> getDocumentsForTenant(String tenantId) {
 
-        return repository.findByTenantId(tenantId);
-    }
+        log.info("📄 Fetching all documents for tenant '{}'", tenantId);
 
-    public List<SearchDocument> getDocumentsForCurrentTenant() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String tenantId = (String) auth.getDetails();
-        return repository.findByTenantId(tenantId);
+        return searchRepository.findByTenantId(tenantId);
+
     }
 
 }

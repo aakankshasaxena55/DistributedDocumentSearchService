@@ -36,10 +36,13 @@ public class DocumentController {
         return ResponseEntity.ok(documentService.save(doc, tenantId));
     }
 
+    @PreAuthorize("hasAnyRole('USER')")
     @GetMapping("/{id}")
     public ResponseEntity<DocumentEntity> getDocument(@PathVariable Long id) {
         String tenantId = TenantContext.getTenantId();
-        return ResponseEntity.ok(documentService.findById(id, tenantId));
+        return documentService.findById(id, tenantId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.noContent().build()); // 204
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
@@ -59,7 +62,6 @@ public class DocumentController {
         return ResponseEntity.ok(documentService.findByTenant(tenantId));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteDocument(@PathVariable Long id) {
         String tenantId = TenantContext.getTenantId();

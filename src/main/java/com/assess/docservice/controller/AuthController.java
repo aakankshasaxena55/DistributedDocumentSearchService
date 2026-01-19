@@ -1,5 +1,6 @@
 package com.assess.docservice.controller;
 
+import com.assess.docservice.component.TenantContext;
 import com.assess.docservice.dto.LoginRequest;
 import com.assess.docservice.service.JwtService;
 import org.springframework.http.HttpStatus;
@@ -25,17 +26,38 @@ public class AuthController {
     @PostMapping("/token")
     public ResponseEntity<?> token(@RequestBody LoginRequest request) {
 
-        if (!"user1".equals(request.getUsername())
-                || !"password".equals(request.getPassword())) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        // USER login
+        if ("user1".equals(request.getUsername())
+                && "password".equals(request.getPassword())) {
+
+            String token = jwtService.generateToken(
+                    request.getUsername(),
+                    List.of("ROLE_USER"),
+                    "tenant1"
+            );
+
+            return ResponseEntity.ok(Map.of("accessToken", token));
         }
 
-        String token = jwtService.generateToken(
-                request.getUsername(),
-                List.of("ROLE_USER"),
-                "tenant1"
-        );
+        // ADMIN login
+        if ("admin1".equals(request.getUsername())
+                && "adminpass".equals(request.getPassword())) {
 
-        return ResponseEntity.ok(Map.of("accessToken", token));
+            String token = jwtService.generateToken(
+                    request.getUsername(),
+                    List.of("ROLE_ADMIN"),
+                    "tenant1"
+            );
+
+            return ResponseEntity.ok(Map.of("accessToken", token));
+        }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
+
+    private String getTenantId() {
+        return TenantContext.getTenantId();
+    }
+
+
 }

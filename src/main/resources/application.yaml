@@ -24,6 +24,10 @@ spring:
   cache:
     type: redis
 
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
 management:
   endpoints:
     web:
@@ -35,4 +39,7 @@ management:
 
 logging:
   level:
+    org.springframework.data.elasticsearch: DEBUG
     org.springframework.security: DEBUG
+    com.assess.docservice.service.SearchService: INFO
+    com.assess.docservice.controller.SearchController: DEBUG
