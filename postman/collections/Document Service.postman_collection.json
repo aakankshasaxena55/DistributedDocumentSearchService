@@ -1,0 +1,323 @@
+{
+  "info": {
+    "_postman_id": "6815aa12-473f-46af-848d-9d3e230c9587",
+    "name": "Document Service",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "DELETE Document",
+      "id": "159c347b-983f-4957-b626-2d38d7483873",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEiLCJyb2xlcyI6WyJST0xFX0FETUlOIl0sInRlbmFudElkIjoidGVuYW50MSIsImlhdCI6MTc2ODg0MzcyMiwiZXhwIjoxNzY4ODQ3MzIyfQ.2CTAgGmeYXGjnNd4uRwnLQ_9j72Ipy4UEV9cxHijGNI",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "tenant1",
+            "type": "text",
+            "uuid": "119f3795-7861-4cb1-80b9-68c02bbf31e0"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/documents/3",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "documents",
+            "3"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Admin Token",
+      "id": "7d6eba89-7c13-4c8a-8301-d192befc0177",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text",
+            "uuid": "3fb48bb3-6081-4061-88f1-d38820c2a4b1"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"username\": \"admin1\",\r\n  \"password\": \"adminpass\"\r\n}\r\n\r\n\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/auth/token",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "auth",
+            "token"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Index Document",
+      "id": "d8686d49-4bb6-4adb-9716-692c702d3a75",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJ0ZW5hbnRJZCI6InRlbmFudDEiLCJpYXQiOjE3Njg4NDM4MDUsImV4cCI6MTc2ODg0NzQwNX0.WfHZpckAb2kipf6Ex7PpWKddBRF0rL5HVYczzeofTpc",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "tenant1",
+            "type": "text",
+            "uuid": "63369914-f284-491f-8f5a-a6342b47ddb2"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"Distributed system \",\r\n  \"content\": \"This service should demonstrate enterprise-grade architectural patterns including multi-tenancy, fault tolerance, and horizontal scalability.\",\r\n  \"tags\": [\"scalability\", \"cacFThe\", \"resilience\", \"multi-tenant\"]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/documents",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "documents"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Document",
+      "id": "17ffbf78-1536-48c6-9b40-40ae72f387c6",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJ0ZW5hbnRJZCI6InRlbmFudDEiLCJpYXQiOjE3Njg4NDM4MDUsImV4cCI6MTc2ODg0NzQwNX0.WfHZpckAb2kipf6Ex7PpWKddBRF0rL5HVYczzeofTpc",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "tenant1",
+            "type": "text",
+            "uuid": "ec5f80d5-d5e0-4bb1-a6f8-58639d0e27ad"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/documents/6",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "documents",
+            "6"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Search Document",
+      "id": "e7148d6c-0561-40e9-a6a0-6cbce66a5bda",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJ0ZW5hbnRJZCI6InRlbmFudDEiLCJpYXQiOjE3Njg4NDM4MDUsImV4cCI6MTc2ODg0NzQwNX0.WfHZpckAb2kipf6Ex7PpWKddBRF0rL5HVYczzeofTpc",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "tenant1",
+            "type": "text",
+            "uuid": "6a89d92f-ad78-4db2-9d77-783a6b0a1890"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/search?q=distributed&tenant=tenant1 ",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "search"
+          ],
+          "query": [
+            {
+              "key": "q",
+              "value": "distributed",
+              "uuid": "c4f30d1e-ec95-4551-bc6d-c3faf79cf8b6"
+            },
+            {
+              "key": "tenant",
+              "value": "tenant1 ",
+              "uuid": "6324d7ce-464e-4a24-9851-ece7920b07f8"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Health",
+      "id": "6cdf857a-4f3d-4cea-a6b0-69ef0dcbd6d4",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/actuator/health",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "actuator",
+            "health"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET User Token",
+      "id": "a9d87b5e-50b5-4f6c-9303-d58069dcd671",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text",
+            "uuid": "3fb48bb3-6081-4061-88f1-d38820c2a4b1"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"username\": \"user1\",\r\n  \"password\": \"password\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/auth/token",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "auth",
+            "token"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
